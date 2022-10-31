@@ -5,7 +5,7 @@ import tkinter as tk
 
 def calibrate_positions():
 	"""
-	Go though all the buttons and prompt the user to select their location on the screen.
+	Go through all the buttons and prompt the user to select their location on the screen.
 	Save all the button positions to a JSON file.
 	"""
 	coords: tuple[int, int] = (0, 0)
@@ -20,14 +20,14 @@ def calibrate_positions():
 
 	positions: dict[str, tuple[int, int]] = {}
 	steps: list[str] = [
-		"take_photo",
-		"send_to",
-		"send_to_input_field",
-		"first_result",
-		"send"
+		"Take the photo",
+		"'Send To' button",
+		"'Send To' input field",
+		"First result",
+		"Send"
 		]
 
-	print("Starting Calibration\nPrepare to press some buttons!")
+	input("Starting Calibration. Press enter to start\n> ")
 	time.sleep(1)
 
 	for step in steps:
