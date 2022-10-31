@@ -42,7 +42,7 @@ def calibrate_positions():
 		root.mainloop()
 		positions[step] = coords
 		print(coords)
-		input("Press enter to continue.\n> ")
+		input("Moving to the next step. Press enter to continue.\n> ")
 
 	# Write and save the file
 	file_name: str = "ButtonPosition.json"
