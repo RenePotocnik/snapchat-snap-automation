@@ -44,14 +44,14 @@ def main() -> None:
     # Get the position of all the steps on screen from a JSON file
     step_positions: dict[str, list] = get_positions(file="ButtonPosition.json")
 
-    count = int(input("Amount of snaps to send (default: 10): "))
-    interval = float(input("Time between each snap (default: 3): "))
-    delay = float(input("Delay between actions (default: 0.4): "))
+    count = input("Amount of snaps to send (default: 10): ")
+    interval = input("Time between each snap (default: 3): ")
+    delay = input("Delay between actions (default: 0.4): ")
     user = input(f"Recipient: ")
 
-    send_snaps(count=count if count else 10,
-               interval=interval if interval else 3,
-               delay=delay if delay else 0.4,
+    send_snaps(count=int(count) if count else 10,
+               interval=int(interval) if interval else 3,
+               delay=int(delay) if delay else 0.4,
                positions=step_positions,
                user=user)
 
