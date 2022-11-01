@@ -38,7 +38,7 @@ def send_snaps(count: int, interval: float, delay: float, positions: dict[str, l
             pyautogui.click(x=coords[0], y=coords[1])
             time.sleep(delay)
 
-            if step == "send_to_input_field":
+            if step == "'Send To' input field":
                 pyautogui.write(user)
 
 
@@ -49,7 +49,9 @@ def main() -> None:
     count = input("Amount of snaps to send (default: 10): ")
     interval = input("Time between each snap (default: 3): ")
     delay = input("Delay between actions (default: 0.4): ")
-    user = input(f"Recipient: ")
+    user: str = ""
+    while not user:
+        user = input(f"Recipient: ")
 
     send_snaps(count=int(count) if count else 10,
                interval=float(interval) if interval else 3,
