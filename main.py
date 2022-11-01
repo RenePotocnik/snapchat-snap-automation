@@ -5,6 +5,7 @@ import pyautogui
 
 
 def get_positions(file: str) -> dict[str, list]:
+    """Read and load the given JSON file. Returns a dictionary of the step names and positions"""
     try:
         with open(file, "r") as pos_file:
             return json.load(pos_file)
