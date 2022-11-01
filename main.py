@@ -15,14 +15,16 @@ def get_positions(file: str) -> dict[str, list]:
 def send_snaps(count: int, interval: float, delay: float, positions: dict[str, list], user: str) -> None:
     """Send snaps on snapchat using mouse movements.
 
-	:param count: How many snaps to send
-	:param interval: How often to send a snap. *{Time to send a snap} + {interval}*
-	:param delay: The delay between each action/step
-	:param positions: Dictionary of all the step positions 
-	:param user: The recepient of the snaps
-	"""
+    :param count: The amount of snaps to send
+    :param interval: Time between each snap
+    :param delay: The delay between each step/action
+    :param positions: Dictionary including the names and positions of each step
+    :param user: The username of the recipient whom the snaps will be sent to
+    """
+    sec_to_complete: float = (count * (len(positions) * (delay * 2))) + (count - 1) * interval
     if "n" in input(f"Estimated time to complete: "
-                    f"{round(((count * (len(positions) * (delay * 2))) + (count - 1) * interval) / 60, 2)} minutes\n"
+                    f"{int(sec_to_complete / 60)} minute{'s' if int(sec_to_complete / 60) > 1 else ''}"
+                    f" {int(sec_to_complete % 60)} second{'s' if int(sec_to_complete % 60) > 1 else ''}\n"
                     f"Continue? [y/n]: ").lower():
         return
     for i in range(count):
@@ -47,14 +49,14 @@ def main() -> None:
     step_positions: dict[str, list] = get_positions(file="ButtonPosition.json")
 
     count = input("Amount of snaps to send (default: 10): ")
-    interval = input("Time between each snap (default: 3): ")
+    interval = input("Time between each snap (default: 2): ")
     delay = input("Delay between actions (default: 0.4): ")
     user: str = ""
     while not user:
         user = input(f"Recipient: ")
 
     send_snaps(count=int(count) if count else 10,
-               interval=float(interval) if interval else 3,
+               interval=float(interval) if interval else 2,
                delay=float(delay) if delay else 0.4,
                positions=step_positions,
                user=user)
