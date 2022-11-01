@@ -21,8 +21,10 @@ def send_snaps(count: int, interval: float, delay: float, positions: dict[str, l
 	:param positions: Dictionary of all the step positions 
 	:param user: The recepient of the snaps
 	"""
-    print(f"Estimated time to complete: {(count * (len(positions) * (delay * 2))) + (count - 1) * interval}")
-
+    if "n" in input(f"Estimated time to complete: "
+                    f"{round(((count * (len(positions) * (delay * 2))) + (count - 1) * interval) / 60, 2)} minutes\n"
+                    f"Continue? [y/n]: ").lower():
+        return
     for i in range(count):
         if i:
             print("Waiting for", interval, "sec.")
@@ -50,8 +52,8 @@ def main() -> None:
     user = input(f"Recipient: ")
 
     send_snaps(count=int(count) if count else 10,
-               interval=int(interval) if interval else 3,
-               delay=int(delay) if delay else 0.4,
+               interval=float(interval) if interval else 3,
+               delay=float(delay) if delay else 0.4,
                positions=step_positions,
                user=user)
 
