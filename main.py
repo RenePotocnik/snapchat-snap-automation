@@ -1,7 +1,9 @@
 import json
+import threading
 import time
 
 import pyautogui
+import keyboard
 
 
 def get_positions(file: str) -> dict[str, list]:
@@ -45,6 +47,13 @@ def send_snaps(count: int, interval: float, delay: float, positions: dict[str, l
                 pyautogui.write(user)
 
 
+def exit_on_button_press(button: str = "esc"):
+    while True:
+        keyboard.wait(button)
+        print(f"'{button}' was pressed - Exiting")
+        return True
+
+
 def main() -> None:
     # Get the position of all the steps on screen from a JSON file
     step_positions: dict[str, list] = get_positions(file="ButtonPosition.json")
@@ -56,11 +65,22 @@ def main() -> None:
     while not user:
         user = input(f"Recipient: ")
 
-    send_snaps(count=int(count) if count else 10,
-               interval=float(interval) if interval else 2,
-               delay=float(delay) if delay else 0.4,
-               positions=step_positions,
-               user=user)
+    main_process = threading.Thread(target=send_snaps,
+                                    args=(int(count) if count else 10,
+                                          float(interval) if interval else 2,
+                                          float(delay) if delay else 0.4,
+                                          step_positions,
+                                          user),
+                                    daemon=True)
+    main_process.start()
+    if exit_on_button_press():
+        exit()
+    # Previous code without threading
+    # send_snaps(count=int(count) if count else 10,
+    #            interval=float(interval) if interval else 2,
+    #            delay=float(delay) if delay else 0.4,
+    #            positions=step_positions,
+    #            user=user)
 
 
 if __name__ == '__main__':
