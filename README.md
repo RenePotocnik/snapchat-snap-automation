@@ -62,3 +62,4 @@ button positions.
 every step is done successfully
 - [ ] Add ability to send snaps to multiple people at once
 - [ ] Support for mobile version of Snapchat - over [BlueStacks](https://www.bluestacks.com/K) or [*scrcpy*](https://github.com/Genymobile/scrcpy)
+- [ ] Add randomization to steps delay - could prevent/reduce bot detection
