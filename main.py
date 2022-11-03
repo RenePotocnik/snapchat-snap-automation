@@ -5,6 +5,8 @@ import time
 import pyautogui
 import keyboard
 
+import calibrate_positions
+
 
 def get_positions(file: str) -> dict[str, list]:
     """Read and load the given JSON file. Returns a dictionary of the step names and positions"""
@@ -50,7 +52,7 @@ def send_snaps(count: int, interval: float, delay: float, positions: dict[str, l
 def exit_on_button_press(button: str = "esc"):
     while True:
         keyboard.wait(button)
-        print(f"'{button}' was pressed - Exiting")
+        print("Exiting")
         return True
 
 
@@ -75,14 +77,9 @@ def main() -> None:
     main_process.start()
     if exit_on_button_press():
         exit()
-    # Previous code without threading
-    # send_snaps(count=int(count) if count else 10,
-    #            interval=float(interval) if interval else 2,
-    #            delay=float(delay) if delay else 0.4,
-    #            positions=step_positions,
-    #            user=user)
 
 
 if __name__ == '__main__':
+    if "n" not in input("Calibrate positions (recommended)? [y/n]:\n> "):
+        calibrate_positions.calibrate_positions()
     main()
-    exit("Done!")
