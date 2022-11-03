@@ -47,6 +47,7 @@ def send_snaps(count: int, interval: float, delay: float, positions: dict[str, l
 
             if step == "'Send To' input field":
                 pyautogui.write(user)
+    pyautogui.press("esc")
 
 
 def exit_on_button_press(button: str = "esc"):
