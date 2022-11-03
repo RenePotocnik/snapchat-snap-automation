@@ -61,11 +61,17 @@ def calibrate_positions():
     Create a dictionary with all the buttons and their positions inside the selected area.
     Save all the button positions to a JSON file.
     """
-    canvas = ScreenCrop()
-    canvas.master_screen.mainloop()
-    print(f"Selected camera UI coordinates:\n"
-          f"Top:    {canvas.start_x}x{canvas.start_y}\n"
-          f"Bottom: {canvas.end_x}x{canvas.end_y}")
+    while True:
+        canvas = ScreenCrop()
+        canvas.master_screen.mainloop()
+        print(f"Selected camera UI coordinates:\n"
+              f"Top:    {canvas.start_x}x{canvas.start_y}\n"
+              f"Bottom: {canvas.end_x}x{canvas.end_y}")
+        if "y" in input(f'{"_" * 21}\n'
+                        'Confirm selected area\n'
+                        '["n" to redo / "y" to continue]\n>'
+                        '>'):
+            break
 
     w_width = canvas.end_x - canvas.start_x
     w_height = canvas.end_y - canvas.start_y
