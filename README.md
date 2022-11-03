@@ -57,9 +57,10 @@ button positions.
 ---
 
 # Plans for future updates
+- [ ] Better calibration
 - [ ] Remove mouse dependency - perhaps sending snaps using API
 - [ ] Error correction - currently if your system lags, there's nothing checking for the error and making sure 
-every step is done successfully
+  every step is done successfully
 - [ ] Add ability to send snaps to multiple people at once
 - [ ] Support for mobile version of Snapchat - over [BlueStacks](https://www.bluestacks.com/K) or [*scrcpy*](https://github.com/Genymobile/scrcpy)
 - [ ] Add randomization to steps delay - could prevent/reduce bot detection
